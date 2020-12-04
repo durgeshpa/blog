@@ -1,0 +1,24 @@
+{%	extends	"blog/base.html"	%}
+{%	block	title	%}Share	a	post{%	endblock	%}
+	
+After	creating	the	form,	programming	the	view,	and	adding	the
+URL	pattern,	we	are	only	missing	the	template	for	this	view.	Create
+a	new	file	in	the	 blog/templates/blog/post/ 	directory	and	name	it
+share.html ;	add	the	following	code	to	it:
+r
+{%	block	content	%}
+		{%	if	sent	%}
+				<h1>E-mail	successfully	sent</h1>
+				<p>
+						"{{	post.title	}}"	was	successfully	sent	to	{{	form.cleaned_data.to	}}.
+				</p>
+		{%	else	%}
+				<h1>Share	"{{	post.title	}}"	by	e-mail</h1>
+					<form	action="."	method="post">
+						{%	csrf_token	%}
+						{{	form.as_p	}}
+						
+						<input	type="submit"	value="Send	e-mail">
+					</form>
+					{% endif %}
+					{% endblock %}
